@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+
 public class BookDto implements Serializable {
      private String bookId;
      private String bookName;
