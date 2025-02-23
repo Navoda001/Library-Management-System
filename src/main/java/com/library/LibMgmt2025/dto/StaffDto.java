@@ -10,7 +10,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Data
 public class StaffDto implements Serializable {
-    private int staffId;
+    private String staffId;
     private String firstName;
     private String lastName;
     private String email;
