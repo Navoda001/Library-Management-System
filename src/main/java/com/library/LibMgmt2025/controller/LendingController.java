@@ -18,11 +18,6 @@ import java.util.List;
 public class LendingController {
     private final LendingService lendingService;
 
-    @GetMapping("health")
-    public  String healthTest(){
-        return "Lending Controller Running";
-    }
-
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> addLending(@RequestBody LendingDto lendingDto){
        lendingService.addLendingData(lendingDto);
