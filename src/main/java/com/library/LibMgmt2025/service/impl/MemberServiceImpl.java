@@ -2,6 +2,7 @@ package com.library.LibMgmt2025.service.impl;
 
 import com.library.LibMgmt2025.dto.MemberDto;
 import com.library.LibMgmt2025.service.MemberService;
+import com.library.LibMgmt2025.util.UtilData;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,7 +13,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void saveMember(MemberDto memberDto) {
-
+    memberDto.setMemberId(UtilData.generateMemberId());
+    memberDto.setMembershipDate(String.valueOf(UtilData.generateTodayDate()));
+    System.out.println(memberDto);
     }
 
     @Override

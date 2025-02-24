@@ -3,6 +3,7 @@ package com.library.LibMgmt2025.service.impl;
 import com.library.LibMgmt2025.dto.Role;
 import com.library.LibMgmt2025.dto.StaffDto;
 import com.library.LibMgmt2025.service.StaffService;
+import com.library.LibMgmt2025.util.UtilData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,9 @@ import java.util.List;
 public class StaffServiceImpl implements StaffService {
     @Override
     public void saveStaff(StaffDto staffDto) {
+        staffDto.setStaffId(UtilData.generateStaffId());
+        staffDto.setLastUpdate(String.valueOf(UtilData.generateTodayDate()));
+        System.out.println(staffDto);
 
     }
 
@@ -34,6 +38,7 @@ public class StaffServiceImpl implements StaffService {
         staff.setLastName("Brown");
         staff.setEmail("james.brown@gmail.com");
         staff.setJoinDate("2025-01-18");
+        staff.setPhone("0777777777");
         staff.setRole(Role.ADMIN);
 
         return staff;

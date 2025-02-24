@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface LendingService {
     void addLendingData (LendingDto lendingDto);
-    void handOverBook (String lendingId , LendingDto lendingDto);
+    void handOverBook (String lendingId);
     void deleteLendingData (String lendingId);
     LendingDto getSelectedLendingData (String lendingId);
     List<LendingDto> getAllLendingData();

@@ -2,21 +2,35 @@ package com.library.LibMgmt2025.service.impl;
 
 import com.library.LibMgmt2025.dto.LendingDto;
 import com.library.LibMgmt2025.service.LendingService;
+import com.library.LibMgmt2025.util.UtilData;
+import jdk.jshell.execution.Util;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class LendingServiceImpl implements LendingService {
+    @Value("${perDayFine}")// value Injection
+    private Double perDayAmount;
     @Override
     public void addLendingData(LendingDto lendingDto) {
-
+    lendingDto.setLendingId(UtilData.generateLendingId());
+    lendingDto.setLendingDate(String.valueOf(UtilData.generateTodayDate()));
+    lendingDto.setReturnDate(String.valueOf(UtilData.generateBookReturnDate()));
+    lendingDto.setIsActiveLending(true);
+    lendingDto.setFineAmount(0.00);
+    lendingDto.setOverDueDays(0L);
+    System.out.println(lendingDto);
     }
 
     @Override
-    public void handOverBook(String lendingId, LendingDto lendingDto) {
-
+    public void handOverBook(String lendingId) {
+        //Todo 1: check the details of the lending record - DB
+        //Todo: check overdue and fine
     }
 
     @Override
@@ -99,5 +113,16 @@ public class LendingServiceImpl implements LendingService {
         lendingDtoList.add(lending5);
 
         return lendingDtoList;
+    }
+    private Long calOverDue(){
+        LocalDate today = UtilData.generateTodayDate();
+        LocalDate returnDate = UtilData.generateBookReturnDateCalc();
+        if (returnDate.isBefore(today)) {
+            return ChronoUnit.DAYS.between(today, returnDate);
+        }
+        return 0L;
+    }
+    private Double calcFine(Long dataCount){
+        return dataCount * perDayAmount;
     }
 }
