@@ -32,7 +32,6 @@ public class BookController {
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Void> addBook(@RequestBody BookDto bookDto){
-//    System.out.println(bookDto);
     bookService.addBook(bookDto);
     return new ResponseEntity<>(HttpStatus.CREATED);
   }

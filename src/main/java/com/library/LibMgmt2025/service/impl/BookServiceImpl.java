@@ -2,8 +2,7 @@ package com.library.LibMgmt2025.service.impl;
 
 import com.library.LibMgmt2025.dto.BookDto;
 import com.library.LibMgmt2025.service.BookService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import com.library.LibMgmt2025.util.UtilData;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,6 +13,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void addBook(BookDto bookDto) {
+        //Business process
+        bookDto.setBookId(UtilData.generateBookId());
         System.out.println(bookDto);
     }
 
