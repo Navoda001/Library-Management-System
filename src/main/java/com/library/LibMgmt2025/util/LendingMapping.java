@@ -4,7 +4,9 @@ import com.library.LibMgmt2025.dto.LendingDto;
 import com.library.LibMgmt2025.entity.BookEntity;
 import com.library.LibMgmt2025.entity.LendingEntity;
 import com.library.LibMgmt2025.entity.MemberEntity;
+import org.springframework.stereotype.Component;
 
+@Component
 public class LendingMapping {
     public static LendingDto toLendingDto(LendingEntity lendingEntity) {
         LendingDto lendingDto = new LendingDto();
