@@ -91,8 +91,8 @@ public class LendingServiceImpl implements LendingService {
 
     @Override
     public LendingDto getSelectedLendingData(String lendingId) {
-
-        return null;
+        LendingEntity foundLending = lendingDao.findById(lendingId).orElseThrow(() -> new LendingNotFoundException("Lending data not found"));
+        return lendingMapping.toLendingDto(foundLending);
     }
 
     @Override

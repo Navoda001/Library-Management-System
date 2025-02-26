@@ -69,12 +69,24 @@ public class LendingController {
         }
     }
 
-    @GetMapping("{lendingId}")
-    public ResponseEntity<LendingDto> getSelectedLending(@PathVariable String lendingId){
-         return ResponseEntity.ok(lendingService.getSelectedLendingData(lendingId));
+    @GetMapping
+    public ResponseEntity<LendingDto> getSelectedLending(@RequestParam String lendingId){
+         if (lendingId == null){
+             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+         }
+         try {
+             return ResponseEntity.ok(lendingService.getSelectedLendingData(lendingId));
+         }catch (LendingNotFoundException e){
+             e.printStackTrace();
+             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+         } catch (Exception e) {
+             e.printStackTrace();
+             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+         }
+
     }
 
-    @GetMapping
+    @GetMapping("getAllLendings")
     public ResponseEntity<List<LendingDto>> getAllLendings(){
         return ResponseEntity.ok(lendingService.getAllLendingData());
     }
