@@ -63,12 +63,24 @@ public class StaffController {
 
     }
 
-    @GetMapping("{staffId}")
-    public ResponseEntity<StaffDto> getSelectedBook(@PathVariable String staffId){
-        return ResponseEntity.ok(staffService.getSelectedStaffMember(staffId));
+    @GetMapping
+    public ResponseEntity<StaffDto> getSelectedBook(@RequestParam String staffId){
+        if (staffId == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        try {
+            return ResponseEntity.ok(staffService.getSelectedStaffMember(staffId));
+        }catch (StaffNotFoundException e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
-    @GetMapping
+    @GetMapping("getAllStaff")
     public ResponseEntity<List<StaffDto>> getAllStaffMembers(){
         return ResponseEntity.ok(staffService.getAllStaff());
     }
