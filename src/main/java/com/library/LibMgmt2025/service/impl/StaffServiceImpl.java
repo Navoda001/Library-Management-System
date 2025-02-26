@@ -1,22 +1,28 @@
 package com.library.LibMgmt2025.service.impl;
 
+import com.library.LibMgmt2025.dao.StaffDao;
 import com.library.LibMgmt2025.dto.Role;
 import com.library.LibMgmt2025.dto.StaffDto;
 import com.library.LibMgmt2025.service.StaffService;
+import com.library.LibMgmt2025.util.EntityDtoConvert;
 import com.library.LibMgmt2025.util.UtilData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class StaffServiceImpl implements StaffService {
+    private final StaffDao staffDao;
+    private final EntityDtoConvert entityDtoConvert;
     @Override
     public void saveStaff(StaffDto staffDto) {
         staffDto.setStaffId(UtilData.generateStaffId());
-        staffDto.setLastUpdate(String.valueOf(UtilData.generateTodayDate()));
-        System.out.println(staffDto);
+        staffDto.setLastUpdate(UtilData.generateTodayDate());
+        staffDao.save(entityDtoConvert.convertStaffDtoToStaffEntity(staffDto));
 
     }
 

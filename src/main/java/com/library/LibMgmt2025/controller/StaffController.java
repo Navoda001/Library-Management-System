@@ -20,6 +20,9 @@ public class StaffController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> addStaff(@RequestBody StaffDto staffDto){
+        if(staffDto == null){
+           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         staffService.saveStaff(staffDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

@@ -22,7 +22,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
-private final MemberDao memberDao;
+    private final MemberDao memberDao;
     private final EntityDtoConvert entityDtoConvert;
 
     @Override
