@@ -28,13 +28,18 @@ public class BookController {
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Void> addBook(@RequestBody BookDto bookDto){
-      System.out.println(bookDto);
+      if (bookDto == null){
+          return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+      }
     bookService.addBook(bookDto);
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
 @DeleteMapping
   public ResponseEntity<Void> deleteBook(@RequestParam("bookIdKey") String bookIdValue){
-       try {
+      if (bookIdValue == null){
+          return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+      }
+      try {
            bookService.deleteBook(bookIdValue);
            return ResponseEntity.noContent().build();
        } catch (BookNotFoundException e) {
@@ -49,7 +54,9 @@ public class BookController {
 
   @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Void> updateBook(@RequestParam ("bookId") String bookId , @RequestBody BookDto bookDto){
-
+      if (bookDto == null || bookId == null){
+          return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+      }
      try{
          bookService.updateBook(bookId, bookDto);
          return ResponseEntity.noContent().build();
@@ -64,7 +71,9 @@ public class BookController {
 
   @GetMapping
   public ResponseEntity<BookDto> getSelectedBook(@RequestParam("bookId") String bookId){
-
+      if (bookId == null){
+          return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+      }
       try{
           var selectedBook = bookService.getSelectedBook(bookId);
           return ResponseEntity.ok(selectedBook);
