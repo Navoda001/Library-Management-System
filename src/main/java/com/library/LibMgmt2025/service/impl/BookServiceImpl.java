@@ -70,7 +70,15 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDto getSelectedBook(String bookId) {
-        return  null;
+        Optional<BookEntity> byId = bookDao.findById(bookId);
+        if (!byId.isPresent()) {
+            throw new BookNotFoundException("Selected Book not found");
+        }
+        BookEntity selectedBookEntity = bookDao.getReferenceById(bookId);
+        BookDto selectedBookDto = entityDtoConvert.convertBookEntityToBookDto(selectedBookEntity);
+        return selectedBookDto;
+
+
     }
 
     @Override

@@ -49,19 +49,35 @@ public class BookController {
 
   @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Void> updateBook(@RequestParam ("bookId") String bookId , @RequestBody BookDto bookDto){
-      System.out.println(bookId);
-      System.out.println(bookDto);
-      bookService.updateBook(bookId, bookDto);
-        return ResponseEntity.noContent().build();
+
+     try{
+         bookService.updateBook(bookId, bookDto);
+         return ResponseEntity.noContent().build();
+     } catch (BookNotFoundException e) {
+         e.printStackTrace();
+         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+     }catch (Exception e){
+         e.printStackTrace();
+         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+     }
   }
 
-  @GetMapping("{bookId}")
-  public ResponseEntity<BookDto> getSelectedBook(@PathVariable String bookId){
-        System.out.println("Get selected book for :"+bookId);
-        return ResponseEntity.ok(bookService.getSelectedBook(bookId));
+  @GetMapping
+  public ResponseEntity<BookDto> getSelectedBook(@RequestParam("bookId") String bookId){
+
+      try{
+          var selectedBook = bookService.getSelectedBook(bookId);
+          return ResponseEntity.ok(selectedBook);
+      } catch (BookNotFoundException e) {
+          e.printStackTrace();
+          return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+      }catch (Exception e){
+          e.printStackTrace();
+          return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+      }
 
     }
-@GetMapping
+@GetMapping("getAllbooks")
     public ResponseEntity<List<BookDto>> getAllBooks(){
     return ResponseEntity.ok(bookService.getAllBooks());
 }
