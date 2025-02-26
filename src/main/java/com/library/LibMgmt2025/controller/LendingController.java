@@ -40,8 +40,20 @@ public class LendingController {
     }
     @DeleteMapping
     public ResponseEntity<Void> deleteLending(@RequestParam("lendingId") String lendingId){
+       if (lendingId == null){
+           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+       }
+    try {
         lendingService.deleteLendingData(lendingId);
         return ResponseEntity.noContent().build();
+    }catch (LendingNotFoundException e){
+        e.printStackTrace();
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    } catch (Exception e) {
+        e.printStackTrace();
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     }
 
     @PatchMapping

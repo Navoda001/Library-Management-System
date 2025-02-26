@@ -80,7 +80,13 @@ public class LendingServiceImpl implements LendingService {
 
     @Override
     public void deleteLendingData(String lendingId) {
+        LendingEntity foundLending = lendingDao.findById(lendingId).orElseThrow(() -> new LendingNotFoundException("Lending data not found"));
+        lendingDao.deleteById(lendingId);
 
+        //add the book when delete the lending record
+        if (foundLending.getIsActiveLending() == true){
+            bookDao.addBookBasedBookHandover(foundLending.getBook().getBookId());
+        }
     }
 
     @Override
