@@ -54,8 +54,11 @@ private final MemberDao memberDao;
 
     @Override
     public MemberDto getSelectedMember(String memberId) {
-
-        return null;
+        Optional<MemberEntity> foundMember = memberDao.findById(memberId);
+        if (!foundMember.isPresent()) {
+            throw new MemberNotFoundException("Member not found");
+        }
+        return entityDtoConvert.convertMemberEntityToMemberDto(memberDao.getReferenceById(memberId));
     }
 
     @Override

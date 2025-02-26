@@ -44,7 +44,7 @@ public class MemberController {
     }
 
     @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> updateMember(@RequestParam("memberId") String memberId , @RequestBody MemberDto memberDetails){
+    public ResponseEntity<Void> updateMember(@RequestParam String memberId , @RequestBody MemberDto memberDetails){
         if (memberId == null || memberDetails == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -59,12 +59,21 @@ public class MemberController {
 
     }
 
-    @GetMapping("{memberId}")
-    public ResponseEntity<MemberDto> getSelectedMember(@PathVariable String memberId){
-        return ResponseEntity.ok(memberService.getSelectedMember(memberId));
+    @GetMapping
+    public ResponseEntity<MemberDto> getSelectedMember(@RequestParam("memberId") String memberId){
+        if (memberId == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        try {
+            return ResponseEntity.ok(memberService.getSelectedMember(memberId));
+        }catch (MemberNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-    @GetMapping
+    @GetMapping("getAllMember")
     public ResponseEntity<List<MemberDto>> getAllStaffMembers(){
         return ResponseEntity.ok(memberService.getAllMembers());
     }
