@@ -5,11 +5,9 @@ import com.library.LibMgmt2025.dao.LendingDao;
 import com.library.LibMgmt2025.dao.MemberDao;
 import com.library.LibMgmt2025.dto.LendingDto;
 import com.library.LibMgmt2025.entity.BookEntity;
+import com.library.LibMgmt2025.entity.LendingEntity;
 import com.library.LibMgmt2025.entity.MemberEntity;
-import com.library.LibMgmt2025.exception.BookNotFoundException;
-import com.library.LibMgmt2025.exception.DataPersistNotFoundException;
-import com.library.LibMgmt2025.exception.EnoughBookNotFoundException;
-import com.library.LibMgmt2025.exception.MemberNotFoundException;
+import com.library.LibMgmt2025.exception.*;
 import com.library.LibMgmt2025.service.LendingService;
 import com.library.LibMgmt2025.util.EntityDtoConvert;
 import com.library.LibMgmt2025.util.LendingMapping;
@@ -68,8 +66,16 @@ public class LendingServiceImpl implements LendingService {
 
     @Override
     public void handOverBook(String lendingId) {
-        //Todo 1: check the details of the lending record - DB
-        //Todo: check overdue and fine
+        LendingEntity foundLending = lendingDao.findById(lendingId).orElseThrow(() -> new LendingNotFoundException("Lending data not found"));
+        var returnDate = foundLending.getReturnDate();
+        var overDue = calOverDue(returnDate); // overdue date count
+        var fineAmount = calcFine(overDue); // calc fine against overdue dates
+
+        foundLending.setOverdueDays(overDue);
+        foundLending.setFineAmount(fineAmount);
+        foundLending.setIsActiveLending(false);
+        //update the book qty against the bookId
+        bookDao.addBookBasedBookHandover(foundLending.getBook().getBookId());
     }
 
     @Override
@@ -88,9 +94,8 @@ public class LendingServiceImpl implements LendingService {
 
         return null;
     }
-    private Long calOverDue(){
+    private Long calOverDue(LocalDate returnDate) {
         LocalDate today = UtilData.generateTodayDate();
-        LocalDate returnDate = UtilData.generateBookReturnDateCalc();
         if (returnDate.isBefore(today)) {
             return ChronoUnit.DAYS.between(today, returnDate);
         }
