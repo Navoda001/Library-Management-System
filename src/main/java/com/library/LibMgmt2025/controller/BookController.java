@@ -5,6 +5,8 @@ import com.library.LibMgmt2025.dto.BookDto;
 import com.library.LibMgmt2025.exception.BookNotFoundException;
 import com.library.LibMgmt2025.service.BookService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,6 +21,7 @@ import java.util.List;
 @RequestMapping("/api/v1/books")
 @RequiredArgsConstructor
 public class BookController {
+    private static final Logger logger = LoggerFactory.getLogger(BookController.class);
 
     private final BookService bookService;
 //    @Autowired
@@ -28,6 +31,7 @@ public class BookController {
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Void> addBook(@RequestBody BookDto bookDto){
+      logger.info("call the addBook() with param {}", bookDto);
       if (bookDto == null){
           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
       }
