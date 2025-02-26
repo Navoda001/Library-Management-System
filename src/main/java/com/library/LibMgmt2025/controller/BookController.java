@@ -2,6 +2,7 @@ package com.library.LibMgmt2025.controller;
 
 
 import com.library.LibMgmt2025.dto.BookDto;
+import com.library.LibMgmt2025.exception.BookNotFoundException;
 import com.library.LibMgmt2025.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,23 @@ public class BookController {
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Void> addBook(@RequestBody BookDto bookDto){
+      System.out.println(bookDto);
     bookService.addBook(bookDto);
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
 @DeleteMapping
   public ResponseEntity<Void> deleteBook(@RequestParam("bookIdKey") String bookIdValue){
-       System.out.println(bookIdValue);
-        return ResponseEntity.noContent().build();
+       try {
+           bookService.deleteBook(bookIdValue);
+           return ResponseEntity.noContent().build();
+       } catch (BookNotFoundException e) {
+           e.printStackTrace();
+           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+       }catch (Exception e){
+           e.printStackTrace();
+           return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+       }
+
   }
 
   @PatchMapping(value = "/{bookId}", consumes = MediaType.APPLICATION_JSON_VALUE)

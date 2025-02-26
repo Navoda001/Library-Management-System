@@ -25,7 +25,7 @@ public class BookEntity {
     private String isbn;
     private Double price;
     private Integer totalQty;
-    private Integer avilableQty;
+    private Integer availableQty;
     private LocalDate lastUpdateDate;
     private Time lastUpdateTime;
     @OneToMany(mappedBy = "book",cascade = CascadeType.ALL,orphanRemoval = true)
