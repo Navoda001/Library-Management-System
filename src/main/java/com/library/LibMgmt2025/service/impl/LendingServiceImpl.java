@@ -97,8 +97,7 @@ public class LendingServiceImpl implements LendingService {
 
     @Override
     public List<LendingDto> getAllLendingData() {
-
-        return null;
+        return lendingMapping.getLendingDTOList(lendingDao.findAll());
     }
     private Long calOverDue(LocalDate returnDate) {
         LocalDate today = UtilData.generateTodayDate();

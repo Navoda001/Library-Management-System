@@ -6,6 +6,9 @@ import com.library.LibMgmt2025.entity.LendingEntity;
 import com.library.LibMgmt2025.entity.MemberEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class LendingMapping {
     public static LendingDto toLendingDto(LendingEntity lendingEntity) {
@@ -32,6 +35,28 @@ public class LendingMapping {
         lendingEntity.setFineAmount(lendingDto.getFineAmount());
         return lendingEntity;
 
+    }
+    public List<LendingDto> getLendingDTOList(List<LendingEntity> lendingEntityList) {
+        return lendingEntityList.stream().map(entity -> {
+            LendingDto lendingDTOData = new LendingDto();
+            lendingDTOData.setLendingId(entity.getLendingId());
+
+            if (entity.getBook() != null) {
+                lendingDTOData.setBook(entity.getBook().getBookId());
+            }
+
+            if (entity.getMember() != null) {
+                lendingDTOData.setMember(entity.getMember().getMemberId());
+            }
+
+            lendingDTOData.setLendingDate(entity.getLendingDate());
+            lendingDTOData.setReturnDate(entity.getReturnDate());
+            lendingDTOData.setIsActiveLending(entity.getIsActiveLending());
+            lendingDTOData.setOverDueDays(entity.getOverdueDays());
+            lendingDTOData.setFineAmount(entity.getFineAmount());
+
+            return lendingDTOData;
+        }).collect(Collectors.toList());
     }
 }
 
