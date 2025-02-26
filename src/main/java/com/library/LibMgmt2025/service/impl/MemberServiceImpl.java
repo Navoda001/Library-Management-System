@@ -63,7 +63,6 @@ private final MemberDao memberDao;
 
     @Override
     public List<MemberDto> getAllMembers() {
-
-       return null;
+        return entityDtoConvert.toMemberDtoList(memberDao.findAll());
     }
 }
