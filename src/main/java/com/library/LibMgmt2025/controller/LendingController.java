@@ -20,6 +20,9 @@ public class LendingController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> addLending(@RequestBody LendingDto lendingDto){
+        if (lendingDto == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
        lendingService.addLendingData(lendingDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

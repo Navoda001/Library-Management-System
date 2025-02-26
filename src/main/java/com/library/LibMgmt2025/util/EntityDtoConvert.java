@@ -48,4 +48,5 @@ public class EntityDtoConvert {
     public List<StaffDto> toStaffDtoList(List<StaffEntity> staffEntityList) {
         return modelMapper.map(staffEntityList,new TypeToken<List<StaffDto>>(){}.getType());
     }
+
 }
