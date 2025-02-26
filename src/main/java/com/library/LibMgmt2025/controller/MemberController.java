@@ -43,10 +43,20 @@ public class MemberController {
         }
     }
 
-    @PatchMapping(value = "/{memberId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> updateMember(@PathVariable String memberId , @RequestBody MemberDto memberDetails){
+    @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> updateMember(@RequestParam("memberId") String memberId , @RequestBody MemberDto memberDetails){
+        if (memberId == null || memberDetails == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    try {
         memberService.updateMember(memberId, memberDetails);
         return ResponseEntity.noContent().build();
+    }catch (MemberNotFoundException e) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    } catch (Exception e) {
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     }
 
     @GetMapping("{memberId}")

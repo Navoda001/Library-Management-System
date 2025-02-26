@@ -34,7 +34,13 @@ private final MemberDao memberDao;
 
     @Override
     public void updateMember(String memberId, MemberDto memberDto) {
-
+        Optional<MemberEntity> foundMember = memberDao.findById(memberId);
+    if (!foundMember.isPresent()) {
+        throw new MemberNotFoundException();
+    }
+        foundMember.get().setName(memberDto.getName());
+    foundMember.get().setEmail(memberDto.getEmail());
+    foundMember.get().setMembershipDate(UtilData.generateTodayDate());
     }
 
     @Override
