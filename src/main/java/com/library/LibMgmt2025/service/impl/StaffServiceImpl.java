@@ -66,6 +66,6 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public List<StaffDto> getAllStaff() {
-return null;
+        return entityDtoConvert.toStaffDtoList(staffDao.findAll());
     }
 }
