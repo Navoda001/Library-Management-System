@@ -3,6 +3,8 @@ package com.library.LibMgmt2025.service.impl;
 import com.library.LibMgmt2025.dao.StaffDao;
 import com.library.LibMgmt2025.dto.Role;
 import com.library.LibMgmt2025.dto.StaffDto;
+import com.library.LibMgmt2025.entity.StaffEntity;
+import com.library.LibMgmt2025.exception.StaffNotFoundException;
 import com.library.LibMgmt2025.service.StaffService;
 import com.library.LibMgmt2025.util.EntityDtoConvert;
 import com.library.LibMgmt2025.util.UtilData;
@@ -12,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -33,7 +37,11 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public void deleteStaff(String staffId) {
-
+        Optional<StaffEntity> foundStaff = staffDao.findById(staffId);
+        if (!foundStaff.isPresent()) {
+            throw new StaffNotFoundException("Staff Member Not Found");
+        }
+        staffDao.deleteById(staffId);
     }
 
     @Override
