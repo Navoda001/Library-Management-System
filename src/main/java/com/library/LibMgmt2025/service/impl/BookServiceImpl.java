@@ -77,13 +77,10 @@ public class BookServiceImpl implements BookService {
         BookEntity selectedBookEntity = bookDao.getReferenceById(bookId);
         BookDto selectedBookDto = entityDtoConvert.convertBookEntityToBookDto(selectedBookEntity);
         return selectedBookDto;
-
-
     }
-
     @Override
     public List<BookDto> getAllBooks() {
-        return null;
+        return entityDtoConvert.toBookDtoList(bookDao.findAll());
 
     }
 }
