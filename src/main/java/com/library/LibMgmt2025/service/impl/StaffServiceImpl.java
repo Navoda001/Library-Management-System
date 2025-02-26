@@ -26,13 +26,25 @@ public class StaffServiceImpl implements StaffService {
     public void saveStaff(StaffDto staffDto) {
         staffDto.setStaffId(UtilData.generateStaffId());
         staffDto.setLastUpdate(UtilData.generateTodayDate());
+        staffDto.setLastupdateTime(UtilData.generatecurrentTime());
         staffDao.save(entityDtoConvert.convertStaffDtoToStaffEntity(staffDto));
 
     }
 
     @Override
     public void updateStaff(String staffId , StaffDto staffDto) {
-
+        Optional<StaffEntity> foundStaffMember = staffDao.findById(staffId);
+        if(!foundStaffMember.isPresent()) {
+            throw new StaffNotFoundException("Staff Member Not Found");
+        }
+            foundStaffMember.get().setFirstName(staffDto.getFirstName());
+        foundStaffMember.get().setLastName(staffDto.getLastName());
+        foundStaffMember.get().setEmail(staffDto.getEmail());
+        foundStaffMember.get().setJoinDate(staffDto.getJoinDate());
+        foundStaffMember.get().setLastUpdate(UtilData.generateTodayDate());
+        foundStaffMember.get().setLastUpdateTime(UtilData.generatecurrentTime());
+        foundStaffMember.get().setPhone(staffDto.getPhone());
+        foundStaffMember.get().setRole(staffDto.getRole());
     }
 
     @Override

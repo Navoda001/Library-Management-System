@@ -45,10 +45,22 @@ public class StaffController {
 
     }
 
-    @PatchMapping(value = "/{staffId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> updateStaff(@PathVariable String staffId , @RequestBody StaffDto staffMemberDetails){
-        staffService.updateStaff(staffId,staffMemberDetails);
-        return ResponseEntity.noContent().build();
+    @PatchMapping( consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> updateStaff(@RequestParam String staffId , @RequestBody StaffDto staffMemberDetails){
+        if (staffMemberDetails == null || staffId == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        try {
+            staffService.updateStaff(staffId,staffMemberDetails);
+            return ResponseEntity.noContent().build();
+        }catch (StaffNotFoundException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     @GetMapping("{staffId}")
