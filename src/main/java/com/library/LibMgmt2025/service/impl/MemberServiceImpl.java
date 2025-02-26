@@ -2,15 +2,21 @@ package com.library.LibMgmt2025.service.impl;
 
 import com.library.LibMgmt2025.dao.MemberDao;
 import com.library.LibMgmt2025.dto.MemberDto;
+import com.library.LibMgmt2025.entity.MemberEntity;
+import com.library.LibMgmt2025.exception.MemberNotFoundException;
 import com.library.LibMgmt2025.service.MemberService;
 import com.library.LibMgmt2025.util.EntityDtoConvert;
 import com.library.LibMgmt2025.util.UtilData;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -33,7 +39,11 @@ private final MemberDao memberDao;
 
     @Override
     public void deleteMember(String memberId) {
-
+        Optional<MemberEntity> foundMember = memberDao.findById(memberId);
+        if (!foundMember.isPresent()) {
+            throw new MemberNotFoundException("Member not found");
+        }
+            memberDao.deleteById(memberId);
     }
 
     @Override
