@@ -1,0 +1,29 @@
+2025-02-27 21:37:15 [main] INFO  c.l.L.LibMgmt2025Application - Starting LibMgmt2025Application using Java 21.0.5 with PID 1280 (C:\Users\Navoda Chathurya\Desktop\IJSE\LibMgmt2025-BackEnd\target\classes started by Navoda Chathurya in C:\Users\Navoda Chathurya\Desktop\IJSE\LibMgmt2025-BackEnd)
+2025-02-27 21:37:15 [main] INFO  c.l.L.LibMgmt2025Application - The following 1 profile is active: "dev"
+2025-02-27 21:37:16 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+2025-02-27 21:37:16 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-02-27 21:37:16 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-02-27 21:37:16 [main] INFO  o.a.c.c.C.[.[localhost].[/booklib] - Initializing Spring embedded WebApplicationContext
+2025-02-27 21:37:16 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-02-27 21:37:16 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final
+2025-02-27 21:37:16 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-02-27 21:37:17 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-02-27 21:37:17 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3c3ab672
+2025-02-27 21:37:17 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-02-27 21:37:17 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-02-27 21:37:17 [main] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-02-27 21:37:17 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-02-27 21:37:18 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-02-27 21:37:19 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-02-27 21:37:20 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+2025-02-27 21:37:20 [main] INFO  c.l.L.LibMgmt2025Application - Started LibMgmt2025Application in 6.001 seconds (process running for 7.137)
+2025-02-27 21:37:26 [http-nio-8082-exec-1] INFO  o.a.c.c.C.[.[localhost].[/booklib] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-02-27 21:44:38 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-02-27 21:44:38 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
