@@ -39,7 +39,7 @@ public class BookController {
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
 @DeleteMapping
-  public ResponseEntity<Void> deleteBook(@RequestParam("bookIdKey") String bookIdValue){
+  public ResponseEntity<Void> deleteBook(@RequestParam("bookId") String bookIdValue){
       if (bookIdValue == null){
           return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
       }

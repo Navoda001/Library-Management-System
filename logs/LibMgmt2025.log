@@ -1,18 +1,18 @@
-2025-02-28 22:06:36 [main] INFO  c.l.L.LibMgmt2025Application - Starting LibMgmt2025Application using Java 21.0.5 with PID 14400 (C:\Users\Navoda Chathurya\Desktop\IJSE\LibMgmt2025-BackEnd\target\classes started by Navoda Chathurya in C:\Users\Navoda Chathurya\Desktop\IJSE\LibMgmt2025-BackEnd)
-2025-02-28 22:06:36 [main] INFO  c.l.L.LibMgmt2025Application - The following 1 profile is active: "dev"
-2025-02-28 22:06:37 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
-2025-02-28 22:06:37 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2025-02-28 22:06:37 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.36]
-2025-02-28 22:06:37 [main] INFO  o.a.c.c.C.[.[localhost].[/booklib] - Initializing Spring embedded WebApplicationContext
-2025-02-28 22:06:37 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-02-28 22:06:37 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final
-2025-02-28 22:06:37 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2025-02-28 22:06:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2025-02-28 22:06:38 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@846b47
-2025-02-28 22:06:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2025-02-28 22:06:38 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-02-28 22:06:38 [main] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
-2025-02-28 22:06:38 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+2025-03-10 12:06:39 [main] INFO  c.l.L.LibMgmt2025Application - Starting LibMgmt2025Application using Java 21.0.5 with PID 4348 (C:\Users\Navoda Chathurya\Desktop\IJSE\LibMgmt2025-BackEnd\target\classes started by Navoda Chathurya in C:\Users\Navoda Chathurya\Desktop\IJSE\LibMgmt2025-BackEnd)
+2025-03-10 12:06:39 [main] INFO  c.l.L.LibMgmt2025Application - The following 1 profile is active: "dev"
+2025-03-10 12:06:41 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8082"]
+2025-03-10 12:06:41 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-03-10 12:06:41 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-03-10 12:06:41 [main] INFO  o.a.c.c.C.[.[localhost].[/booklib] - Initializing Spring embedded WebApplicationContext
+2025-03-10 12:06:41 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-10 12:06:42 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.8.Final
+2025-03-10 12:06:42 [main] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-03-10 12:06:42 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-03-10 12:06:43 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7c3c3d67
+2025-03-10 12:06:43 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-03-10 12:06:43 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-10 12:06:43 [main] WARN  org.hibernate.orm.deprecation - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-03-10 12:06:43 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 8.0
@@ -20,8 +20,12 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2025-02-28 22:06:39 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-02-28 22:06:40 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-02-28 22:06:41 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
-2025-02-28 22:06:41 [main] INFO  c.l.L.LibMgmt2025Application - Started LibMgmt2025Application in 5.75 seconds (process running for 6.647)
-2025-02-28 22:06:54 [http-nio-8082-exec-1] INFO  o.a.c.c.C.[.[localhost].[/booklib] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-10 12:06:44 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-10 12:06:45 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-10 12:06:46 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8082"]
+2025-03-10 12:06:46 [main] INFO  c.l.L.LibMgmt2025Application - Started LibMgmt2025Application in 7.616 seconds (process running for 8.672)
+2025-03-10 15:21:44 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h35m30s961ms564µs300ns).
+2025-03-10 16:34:07 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h8m52s922ms130µs900ns).
+2025-03-10 16:39:43 [http-nio-8082-exec-1] INFO  o.a.c.c.C.[.[localhost].[/booklib] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-10 16:41:59 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-03-10 16:41:59 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
