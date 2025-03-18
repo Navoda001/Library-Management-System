@@ -23,37 +23,38 @@ import java.io.IOException;
 @Order(1)
 public class AuthFilter extends OncePerRequestFilter {
     private final JWTUtils jwtUtils;
-    private final UserDetailsService userDetailsService;
+    private final UserDetailServiceImpl userDetailServiceIMPL;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             //get the token from the request
-            String jwtToken = getJWTToken(request);
+            var jwtToken = getJWTToken(request);
             if(jwtToken != null && jwtUtils.validateToken(jwtToken)) {
-                String username = jwtUtils.getUsernameFromToken(jwtToken);
-                var userDetails = userDetailsService.loadUserByUsername(username);
+                var userName = jwtUtils.getUsernameFromToken(jwtToken);
+                var userDetails = userDetailServiceIMPL.loadUserByUsername(userName);
+
                 var authToken =
                         new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authToken.setDetails(new WebAuthenticationDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authToken);
-            }else {
-
             }
 
-        } catch (Exception e) {
+        }catch (Exception e) {
             e.printStackTrace();
         }
-        filterChain.doFilter(request, response); // when no tokens
+        filterChain.doFilter(request, response);
     }
 
     private String getJWTToken(HttpServletRequest request) {
         //get Auth header
         String authHeader = request.getHeader("Authorization");
-        if (StringUtils.hasText(authHeader) && authHeader.startsWith("Bearer ")) {
+        if(StringUtils.hasText(authHeader) && authHeader.startsWith("Bearer ")) {
             return authHeader.substring(7);
         }else {
             return null;
         }
     }
+
+
 }

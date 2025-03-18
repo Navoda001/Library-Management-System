@@ -22,42 +22,43 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class WebSecurityConfig  {
+public class WebSecurityConfig {
     private final UserDetailsService userDetailsService;
     private final AuthEntryPoint authEntryPoint;
     private final AuthFilter authFilter;
     private final CORSConfig corsConfig;
 
     @Bean
-     public UserDetailsService userDetailsService() {
-         return userDetailsService;
-     }
-     @Bean
+    public UserDetailsService userDetailsService() {
+        return userDetailsService;
+    }
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-     }
-     @Bean
+    }
+    @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
-         var dap = new DaoAuthenticationProvider();
-         dap.setUserDetailsService(userDetailsService);
-         dap.setPasswordEncoder(passwordEncoder());
-         return dap;
-     }
-     @Bean
+        var dap = new DaoAuthenticationProvider();
+        dap.setUserDetailsService(userDetailsService);
+        dap.setPasswordEncoder(passwordEncoder());
+        return dap;
+    }
+    @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
-     }
-     @Bean
-     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    }
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
-                .cors(cors-> cors.configurationSource(corsConfig.corsConfigurationSource()))
+                .cors( cors-> cors.configurationSource(corsConfig.corsConfigurationSource()))
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(authEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth->
+                .authorizeHttpRequests(auth ->
                         auth.requestMatchers("/api/v1/auth/**").permitAll()
                                 .anyRequest().authenticated());
         http.authenticationProvider(daoAuthenticationProvider());
         http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
-     }
+    }
+
 }
