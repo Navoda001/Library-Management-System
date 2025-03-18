@@ -31,4 +31,8 @@ public class UtilData {
     public static LocalDate generateBookReturnDate(){
         return LocalDate.now().plusDays(7);
     }
+    //Generate userId
+    public static String generateUserId(){
+        return "U-"+UUID.randomUUID();
+    }
   }
