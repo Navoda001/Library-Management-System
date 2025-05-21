@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
@@ -29,6 +30,7 @@ public class BookController {
 //        this.bookService = bookService;
 //    }
 
+    @PreAuthorize("hasRole('ADMIN')")
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Void> addBook(@RequestBody BookDto bookDto){
       logger.info("call the addBook() with param {}", bookDto);
@@ -38,6 +40,8 @@ public class BookController {
     bookService.addBook(bookDto);
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
+
+    @PreAuthorize("hasRole('ADMIN')")
 @DeleteMapping
   public ResponseEntity<Void> deleteBook(@RequestParam("bookId") String bookIdValue){
       if (bookIdValue == null){
@@ -66,7 +70,7 @@ public class BookController {
          return ResponseEntity.noContent().build();
      } catch (BookNotFoundException e) {
          e.printStackTrace();
-         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
      }catch (Exception e){
          e.printStackTrace();
          return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
